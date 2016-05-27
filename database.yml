@@ -1,0 +1,9 @@
+banco:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: 
+  pool: 5
+  username:  
+  password:  
+  host: localhost
