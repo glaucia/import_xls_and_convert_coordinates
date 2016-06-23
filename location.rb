@@ -22,7 +22,7 @@ class Location < ActiveRecord::Base
 		        end
 			end			
 
-		    if duplicate_codes.uniq.length == duplicate_codes.length # ou simplesmente poderia ser => if duplicate_codes.size > 0
+		    if duplicate_codes.uniq.length == duplicate_codes.length #if duplicate_codes.size > 0
 		    	location_code 		= true
 		    else
 	      		location_code 		= false
@@ -84,6 +84,7 @@ class Location < ActiveRecord::Base
 
 	    heading = latitude_to_s[0]
 	    ########### HEADING AND DEGREES ###########
+	    #@lat_heading = (lat >= 0)? 'N' : 'S';
 	    if heading == "-"
 	      @lat_heading = "S"
 	      @lat_degrees = latitude_to_s[1..2]
@@ -91,7 +92,7 @@ class Location < ActiveRecord::Base
 	      @lat_heading = "N"
 	      @lat_degrees = latitude_to_s[0..1]
 	    end
-
+		
 	    ########### LATITUDE MINUTES ##############
 	    latitude_parse  	  = latitude.split(".")
 	    latitude_to_f   	  = "0.#{latitude_parse[1]}".to_f
@@ -123,7 +124,7 @@ class Location < ActiveRecord::Base
   	
    	def save_locations_from_xls(row)
 	  	#[101.0, "Ponto Interlagos inicio", "-23.659392901940656", "-46.68911786376111"] OR
-	  	#[201601.0, "R.Candido Ferreira (Inicio) – ida", "25.518710°S", "54.563739°W"]
+	  	#[201601.0, "Ferreira (Inicio) – ida", "25.518710°S", "54.563739°W"]
 
 		############################## SALVAR NO BD ###################################### 
 	  	location = Location.new
@@ -141,8 +142,6 @@ class Location < ActiveRecord::Base
 	  
   	end  
 
-
-	#Location.singleton_methods
 
 	Location.new
 end
